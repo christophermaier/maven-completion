@@ -116,6 +116,27 @@ __maven_single_dash_options="
 	-X
 "
 
+# Use xsltproc to extract property names (defined in a <properties> node) from a Maven POM
+# This will only work if xsltproc is on the path
+__maven_properties_from_pom(){
+if (type -P xsltproc &>/dev/null)
+then
+( xsltproc - $1 ) << EOF
+<xsl:stylesheet version="1.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:m="http://maven.apache.org/POM/4.0.0">
+	<xsl:output method="text"/>
+	<xsl:template match="/">
+		<xsl:for-each select="m:project/m:properties/*">
+			<xsl:value-of select="local-name()"/><xsl:text> </xsl:text>
+		</xsl:for-each>
+	</xsl:template>
+</xsl:stylesheet>
+EOF
+fi
+}
+}
+
 _maven()
 {
     local cur="${COMP_WORDS[COMP_CWORD]}"
