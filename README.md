@@ -21,7 +21,7 @@ Alternatively, if you have `bash-completion` installed and configured, you could
 How to Use
 ----------
 
-The script is currently very basic, providing completion for all Maven lifecycle phases, as well as command-line flags (both short and long style).  Future plans include support for completing properties, module names, and even some commonly-used plugin goals (such as the ones from the [maven-help-plugin](http://maven.apache.org/plugins/maven-help-plugin/)).
+The script is currently very basic, providing completion for all Maven lifecycle phases, as well as command-line flags (both short and long style).  If you have `xsltproc` installed, it will also suggest properties of your project, when defined in the POM files.  Future plans include support for completing module names, and even some commonly-used plugin goals (such as the ones from the [maven-help-plugin](http://maven.apache.org/plugins/maven-help-plugin/)).
 
 Just start typing a command and hit <TAB><TAB> to show options for completion:
 

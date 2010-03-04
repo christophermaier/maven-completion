@@ -39,11 +39,19 @@ EOF
 fi
 }
 
-# Eventually we'll want to collect properties from parent POMs as well
-# For now, this is just a wrapper, though
-__maven_properties(){
-    __maven_properties_from_pom pom.xml
-    # plus others, eventually
+# Collect the properties from this pom and all parent poms above it in the filesystem
+# It doesn't fetch parent poms that aren't in the file hierarchy, though
+maven_properties(){
+    local directory=${PWD}
+    local props
+    if [ -e "pom.xml" ]
+    then
+        props="$@ $(__maven_properties_from_pom pom.xml)"
+        cd .. && __maven_properties $props
+    fi
+    cd $directory
+
+    echo "$props"
 }
 
 _maven(){
