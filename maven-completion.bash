@@ -41,7 +41,7 @@ fi
 
 # Collect the properties from this pom and all parent poms above it in the filesystem
 # It doesn't fetch parent poms that aren't in the file hierarchy, though
-maven_properties(){
+__maven_properties(){
     local directory=${PWD}
     local props
     if [ -e "pom.xml" ]
